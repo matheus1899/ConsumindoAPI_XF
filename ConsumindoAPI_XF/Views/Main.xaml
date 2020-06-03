@@ -3,6 +3,71 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:ConsumindoAPI_XF.ViewModels"
              mc:Ignorable="d"
              x:Class="ConsumindoAPI_XF.Views.Main">
+    <ContentPage.BindingContext>
+        <vm:MainViewModel/>
+    </ContentPage.BindingContext>
+    <RefreshView
+        RefreshColor="{DynamicResource PrimaryColor}"
+        Command="{Binding RefreshList_Command}"
+        IsRefreshing="{Binding IsRefreshing}">
+        <CollectionView
+            SelectionMode="Single"
+            ItemsSource="{Binding Alunos}"
+            SelectedItem="{Binding Item_Selected}"
+            SelectionChangedCommand="{Binding ItemSelectedChanged_Command}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid
+                        Padding="16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="{Binding Alunos.Id}"
+                               TextColor="{DynamicResource PrimaryColor}"
+                               FontAttributes="Bold"
+                               Grid.Row="0"
+                               Grid.RowSpan="1"
+                               Grid.Column="0"/>
+                        <Label 
+                            TextColor="{DynamicResource PrimaryColor}"
+                            HorizontalOptions="StartAndExpand"
+                            Grid.Row="0"
+                            Grid.Column="1">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text="{Binding Alunos.Nome}"/>
+                                        <Span Text=" "/>
+                                        <Span Text="{Binding ALunos.Sobrenome}"/>
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label 
+                            TextColor="{DynamicResource PrimaryColor}"
+                            Text="{Binding Alunos.Turma, StringFormat='Turma: {0}'}"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            HorizontalOptions="End"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <Label 
+                    TextColor="{DynamicResource PrimaryColor}"
+                    Text="Nenhum aluno encontrado" 
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="CenterAndExpand"/>
+            </CollectionView.EmptyView>
+        </CollectionView>
+    </RefreshView>
 </ContentPage>

@@ -6,6 +6,7 @@
              mc:Ignorable="d"
              x:Class="ConsumindoAPI_XF.App">
     <Application.Resources>
-
+        <Color x:Key="PrimaryColor">#8c0079</Color>
+        <Color x:Key="PrimaryDarkColor">#5a004d</Color>
     </Application.Resources>
 </Application>
