@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using ConsumindoAPI_XF.Views;
+using Xamarin.Forms;
 
 namespace ConsumindoAPI_XF
 {
@@ -7,6 +8,7 @@ namespace ConsumindoAPI_XF
         public App()
         {
             InitializeComponent();
+            MainPage = new NavigationPage(new Main());
         }
         protected override void OnStart()
         {
