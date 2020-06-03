@@ -3,6 +3,101 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:ConsumindoAPI_XF.ViewModels"
              mc:Ignorable="d"
              x:Class="ConsumindoAPI_XF.Views.HandleAluno">
+    <ContentPage.BindingContext>
+        <vm:HandleAlunoViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Excluir aluno"
+            Command="{Binding ExcluirAluno_Command}"
+            IsEnabled="{Binding ExcluirAluno_IsEnabled}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid
+                VerticalOptions="Center"
+                Padding="16">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label 
+                    Text="{Binding TxtTitulo}"
+                    FontSize="Large"
+                    FontAttributes="Bold"
+                    TextColor="{DynamicResource PrimaryColor}"
+                    HorizontalOptions="Center"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="10"/>
+                <ActivityIndicator 
+                    Color="{DynamicResource PrimaryDarkColor}"
+                    IsRunning="{Binding ActInd_IsRunning}"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="8"
+                    Grid.ColumnSpan="10"
+                    HorizontalOptions="Center"
+                    />
+                <Entry
+                    Text="{Binding Nome}"
+                    Placeholder="Nome"
+                    PlaceholderColor="{DynamicResource PrimaryLightColor}"
+                    TextColor="{DynamicResource PrimaryDarkColor}"
+                    Keyboard="Text"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="5"/>
+                <Entry
+                    Text="{Binding Sobrenome}"
+                    Placeholder="Sobrenome"
+                    PlaceholderColor="{DynamicResource PrimaryLightColor}"
+                    TextColor="{DynamicResource PrimaryDarkColor}"
+                    Keyboard="Text"
+                    Grid.Row="2"
+                    Grid.Column="5"
+                    Grid.ColumnSpan="5"/>
+                <Entry
+                    Text="{Binding Turma}"
+                    Placeholder="Turma"
+                    PlaceholderColor="{DynamicResource PrimaryLightColor}"
+                    TextColor="{DynamicResource PrimaryDarkColor}"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Text"
+                    MaxLength="3"
+                    Grid.Row="3"
+                    Grid.Column="3"
+                    Grid.ColumnSpan="4"/>
+                <Button 
+                    Text="{Binding TxtTitulo, StringFormat='{0} ALUNO'}"
+                    Command="{Binding InsertOrUpdateAluno_Command}"
+                    TextColor="White"
+                    BackgroundColor="{DynamicResource PrimaryColor}"
+                    Grid.Row="4"
+                    Grid.Column="3"
+                    Grid.ColumnSpan="4"/>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
 </ContentPage>
