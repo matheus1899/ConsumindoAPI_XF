@@ -1,0 +1,28 @@
+{
+  "alunos": [
+    {
+      "id": 1,
+      "Nome": "Ana",
+      "Sobrenome": "Teixeira",
+      "Turma": "1A"
+    },
+    {
+      "id": 2,
+      "Nome": "Alex",
+      "Sobrenome": "Silva",
+      "Turma": "1A"
+    },
+    {
+      "id": 3,
+      "Nome": "Rogério",
+      "Sobrenome": "Ceni",
+      "Turma": "1A"
+    },
+    {
+        "id": 4,
+        "Nome": "Fabrício Queiroz",
+        "Sobrenome": "das Laranjeiras",
+        "Turma": "1A"
+    }
+  ]
+}
