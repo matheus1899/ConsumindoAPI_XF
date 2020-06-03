@@ -12,6 +12,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem
             Text="ADICIONAR"
+            IconImageSource="ic_action_add.png"
             Command="{Binding AdicionarAluno_Command}"/>
     </ContentPage.ToolbarItems>
     <RefreshView

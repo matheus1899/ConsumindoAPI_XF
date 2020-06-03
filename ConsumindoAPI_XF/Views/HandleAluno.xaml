@@ -12,6 +12,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Excluir aluno"
+            IconImageSource="ic_action_delete.png"
             Command="{Binding ExcluirAluno_Command}"
             IsEnabled="{Binding ExcluirAluno_IsEnabled}"/>
     </ContentPage.ToolbarItems>
