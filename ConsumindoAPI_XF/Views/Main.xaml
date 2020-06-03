@@ -9,6 +9,11 @@
     <ContentPage.BindingContext>
         <vm:MainViewModel/>
     </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="ADICIONAR"
+            Command="{Binding AdicionarAluno_Command}"/>
+    </ContentPage.ToolbarItems>
     <RefreshView
         RefreshColor="{DynamicResource PrimaryColor}"
         Command="{Binding RefreshList_Command}"

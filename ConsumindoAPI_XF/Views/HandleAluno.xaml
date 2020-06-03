@@ -66,6 +66,7 @@
                     PlaceholderColor="{DynamicResource PrimaryLightColor}"
                     TextColor="{DynamicResource PrimaryDarkColor}"
                     Keyboard="Text"
+                    ReturnType="Next"
                     Grid.Row="2"
                     Grid.Column="0"
                     Grid.ColumnSpan="5"/>
@@ -75,6 +76,7 @@
                     PlaceholderColor="{DynamicResource PrimaryLightColor}"
                     TextColor="{DynamicResource PrimaryDarkColor}"
                     Keyboard="Text"
+                    ReturnType="Next"
                     Grid.Row="2"
                     Grid.Column="5"
                     Grid.ColumnSpan="5"/>
@@ -85,6 +87,7 @@
                     TextColor="{DynamicResource PrimaryDarkColor}"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Text"
+                    ReturnType="Done"
                     MaxLength="3"
                     Grid.Row="3"
                     Grid.Column="3"

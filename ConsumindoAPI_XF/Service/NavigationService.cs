@@ -10,7 +10,6 @@ namespace ConsumindoAPI_XF.Services
         {
             return Xamarin.Forms.Application.Current.MainPage.Navigation.PopAsync();
         }
-
         public Task NavigateTo_InsertAluno()
         {
             return Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new HandleAluno());

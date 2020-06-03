@@ -12,6 +12,11 @@ namespace ConsumindoAPI_XF.Views
         {
             InitializeComponent();
             vm = (MainViewModel)BindingContext;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
             vm.SetList();
         }
     }

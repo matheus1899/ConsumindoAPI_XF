@@ -1,4 +1,5 @@
 ﻿using ConsumindoAPI_XF.Models;
+using ConsumindoAPI_XF.Services;
 using System;
 using System.Diagnostics;
 using System.Windows.Input;
@@ -72,32 +73,42 @@ namespace ConsumindoAPI_XF.ViewModels
                 IsInsert = false;
                 ExcluirAluno_IsEnabled = true;
                 SetTextFromView();
-                InsertOrUpdateAluno_Command = new Command(Atualizar);
             }
             else
             {
                 IsInsert = true;
                 ExcluirAluno_IsEnabled = false;
                 SetTextFromView();
-                InsertOrUpdateAluno_Command = new Command(Inserir);
             }
         }
-
+        private void InsereOuAtualiza()
+        {
+            if (IsInsert)
+            {
+                Inserir();
+            }
+            else
+            {
+                Atualizar();
+            }
+        }
         private async void Inserir()
         {
             try
             {
                 ActInd_IsRunning = true;
-                bool res = await ConnectionAPI.Connection.InserirAluno(new Aluno(Nome, Sobrenome, Turma));
+                Aluno a = new Aluno();
+                a.Nome = Nome;
+                a.Turma = Turma;
+                a.Sobrenome = Sobrenome;
+                bool res = await ConnectionAPI.Connection.InserirAluno(a);
                 if (res)
                 {
-
                 }
                 else
                 {
                     Debug.WriteLine("HandleAlunoViewModel: InserirAluno res = false");
                 }
-                ActInd_IsRunning = false;
             }
             catch (Exception ex)
             {
@@ -105,6 +116,7 @@ namespace ConsumindoAPI_XF.ViewModels
             }
             finally
             {
+                await DependencyService.Get<INavigationService>().GoBack();
                 ActInd_IsRunning = false;
             }
         }
@@ -121,13 +133,11 @@ namespace ConsumindoAPI_XF.ViewModels
                 bool res = await ConnectionAPI.Connection.AtualizarAluno(a);
                 if (res)
                 {
-
                 }
                 else
                 {
                     Debug.WriteLine("HandleAlunoViewModel: AtualizarAluno res = false");
                 }
-                ActInd_IsRunning = false;
             }
             catch (Exception ex)
             {
@@ -135,6 +145,7 @@ namespace ConsumindoAPI_XF.ViewModels
             }
             finally
             {
+                await DependencyService.Get<INavigationService>().GoBack();
                 ActInd_IsRunning = false;
             }
         }
@@ -142,14 +153,19 @@ namespace ConsumindoAPI_XF.ViewModels
         {
             try
             {
+                if (!ExcluirAluno_IsEnabled)
+                {
+                    return;
+                }
                 ActInd_IsRunning = true;
                 bool res = await ConnectionAPI.Connection.DeletarAluno(AlunoForUpdate.Id);
                 if (res)
                 {
-
+                    await DependencyService.Get<INavigationService>().GoBack();
                 }
                 else
                 {
+                    await DependencyService.Get<INavigationService>().GoBack();
                     Debug.WriteLine("HandleAlunoViewModel: DeletarAluno res = false");
                 }
                 ActInd_IsRunning = false;
@@ -169,7 +185,7 @@ namespace ConsumindoAPI_XF.ViewModels
         public HandleAlunoViewModel()
         {
             ExcluirAluno_Command =new Command(Excluir);
-            InsertOrUpdateAluno_Command = new Command(Inserir);
+            InsertOrUpdateAluno_Command = new Command(InsereOuAtualiza);
         }
     }
 }

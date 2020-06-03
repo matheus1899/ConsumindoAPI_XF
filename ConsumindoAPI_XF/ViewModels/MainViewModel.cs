@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Windows.Input;
 using ConsumindoAPI_XF.Models;
 using System.Collections.Generic;
+using ConsumindoAPI_XF.Services;
 
 namespace ConsumindoAPI_XF.ViewModels
 {
@@ -15,6 +16,7 @@ namespace ConsumindoAPI_XF.ViewModels
 
         public ICommand ItemSelectedChanged_Command{ get; private set; }
         public ICommand RefreshList_Command{ get; private set; }
+        public ICommand AdicionarAluno_Command { get; private set; }
 
         public List<Aluno> Alunos
         {
@@ -24,7 +26,10 @@ namespace ConsumindoAPI_XF.ViewModels
         public Aluno Item_Selected
         {
             get => _Item_Selected;
-            set => SetProperty(ref _Item_Selected, value, nameof(Item_Selected));
+            set
+            {
+                SetProperty(ref _Item_Selected, value, nameof(Item_Selected));
+            }
         }
         public bool IsRefreshing
         {
@@ -59,10 +64,25 @@ namespace ConsumindoAPI_XF.ViewModels
                 Debug.WriteLine("RefreshList: " + ex.Message);
             }
         }
+        private async void GoTo_UpdateAluno()
+        {
+            if (Item_Selected != null)
+            {
+                Aluno a= Item_Selected;
+                await DependencyService.Get<INavigationService>().NavigateTo_UpdateAluno(a);
+                Item_Selected = null;
+            }
+        }
+        private async void GoTo_InsertAluno()
+        {
+            await DependencyService.Get<INavigationService>().NavigateTo_InsertAluno();
+        }
 
         public MainViewModel()
         {
             RefreshList_Command = new Command(RefreshList);
+            ItemSelectedChanged_Command = new Command(GoTo_UpdateAluno);
+            AdicionarAluno_Command = new Command(GoTo_InsertAluno);
         }
     }
 }
